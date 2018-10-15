@@ -12,7 +12,11 @@
 (defconst reason-packages
   '(company
     utop
-    (reason-mode :location local)
+    (reason-mode
+     :location (recipe
+                :repo "reasonml-editor/reason-mode"
+                :fetcher github
+                :files ("reason-mode.el" "refmt.el" "reason-indent.el" "reason-interaction.el")))
     (merlin :location (recipe :fetcher github :repo "ocaml/merlin" :commit "v2.5.4" :files ("emacs/*.el")))
     ;;merlin
     popwin
