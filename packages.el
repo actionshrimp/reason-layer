@@ -13,6 +13,12 @@
   '(company
     utop
     reason-mode
+    (reason-mode
+     :location (recipe
+                :repo "actionshrimp/reason-mode"
+                :branch "opam-refmt"
+                :fetcher github
+                :files ("reason-mode.el" "refmt.el" "reason-indent.el" "reason-interaction.el")))
     merlin
     popwin
     flycheck
