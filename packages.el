@@ -12,7 +12,7 @@
 (defconst reason-packages
   '(company
     utop
-    (reason-mode :location local)
+    reason-mode
     merlin
     popwin
     flycheck
