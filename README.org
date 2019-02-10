@@ -2,20 +2,72 @@
 
 * Description
 
-This is some hacks I've done to get a Spacemacs layer around [[https://github.com/facebook/reason/tree/master/editorSupport/emacs][reason-mode]] found in
-the [[https://github.com/facebook/reason][reason]] repo.
+Spacemacs layer for ReasonML, based around [[https://github.com/reasonml-editor/reason-mode][reason-mode]].
+
+** Features:
+  - Syntax highlighting / indentation
+  - Autocomplete (via `merlin`)
+  - Lint / error display (via `merlin`, and `flycheck` if `syntax-checking` layer is enabled)
+  - REPL via `rtop`
+  - Auto-formatting (via `refmt`)
 
 * Install
 
-Clone this repo into  =~/.emacs.d/private/reason=.
 To use this configuration layer, add it to your =~/.spacemacs=. You will need to
 add =reason= to the existing =dotspacemacs-configuration-layers= list in this
-file. Also make sure you have =ocaml= layer included, since =reason= uses Merlin
-(and only one layer can be in control of a package).
+file.
+
+This layer depends on the `ocaml` layer which should be installed automatically.
+
+** Merlin
+
+You'll need merlin (binaries `ocamlmerlin` and `ocamlmerlin-reason`) installed
+on your system and on your `PATH` for errors and autocompletion. The easiest way
+to get them is to `npm i -g reason-cli`.
+
+If you're familiar with `opam` you can `opam install merlin reason` to get
+`ocamlmerlin` and `ocamlmerlin-reason` on your current `opam` switch.
+
+** Refmt
+
+Similary to Merlin, you'll need the `refmt` binary on your path. `npm i -g
+reason-cli` also installs `refmt`.
+
+If you're familiar with `opam` you can `opam install reason` to get `refmt` on
+your current `opam switch`.
+
+If your project depends on a specific version of `refmt`, you can set
+`refmt-command` (via `customize-mode` or `(setq refmt-command ..)`) to the path
+to a particular binary. You can also use the special values `'npm` or `'opam` to
+run `refmt` via `npx` or `opam exec`, which will keep you on the correct version
+for you current opam switch, or the project-local of `node_modules`.
+
+You can toggle `refmt` on save with `SPC m r t`.
+
+*** Refmt on save
 
 
+* Key bindings
+  
+The main keybindings, see `packages.el` for the main list.
 
-If you get the following at startup:
-=An error occurred while post-configuring company in layer reason (error: (void-function spacemacs|add-company-backends))=
+| Key Binding | Description    |
+|-------------+----------------|
+| ~SPC m g g~ | Jump to definition |
+| ~SPC m g G~ | Jump to definition (other window) |
+| ~SPC m g b~ | Jump back |
+| ~SPC m h t~ | Show type |
+| ~SPC m h h~ | Show docs |
+| ~SPC m r d~ | Merlin destruct |
+| ~SPC m = =~ | Refmt |
+| ~SPC m t r~ | Toggle auto-refmt on save |
 
-The spacemacs|add-company-backend function is a recent addition in the develop branch; see https://github.com/syl20bnr/spacemacs/blob/develop/CHANGELOG.develop#breaking-changes and also [[https://github.com/syl20bnr/spacemacs/commit/74fdbb6][syl20bnr/spacemacs@74fdbb6]].
+# Use GitHub URLs if you wish to link a Spacemacs documentation file or its heading.
+# Examples:
+# [[https://github.com/syl20bnr/spacemacs/blob/master/doc/VIMUSERS.org#sessions]]
+# [[https://github.com/syl20bnr/spacemacs/blob/master/layers/%2Bfun/emoji/README.org][Link to Emoji layer README.org]]
+# If space-doc-mode is enabled, Spacemacs will open a local copy of the linked file.
+
+* Thanks
+
+Special thanks to [[https://github.com/fredyr/][fredyr]] who wrote the initial verison of this layer.
